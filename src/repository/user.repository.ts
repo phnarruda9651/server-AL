@@ -1,8 +1,19 @@
 import {prisma} from '../services/prisma';
 
-export const createUser = async(data:any)=> {
+interface Iprops {
+    email: string,
+    username:string,
+  
+    password: string
+}
+
+export const createUser = async(data:Iprops)=> {
     const user = await prisma.user.create({
-        data,
+        data: {
+            username: data.username,
+            password: data.password,
+            email: data.email
+        },
         select: {
             id: true,
             email: true,
@@ -24,4 +35,19 @@ export const getAll = async () => {
         }
     });
     return users
+}
+
+export const getById = async( id:number )=> {
+    const user = await prisma.user.findUnique({
+        where:{
+            id: id
+        },
+        select: {
+            id: true,
+            email: true,
+            password: false,
+            username: true
+        }
+    })
+    return user
 }
