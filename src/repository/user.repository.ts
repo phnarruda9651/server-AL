@@ -51,3 +51,25 @@ export const getById = async( id:number )=> {
     })
     return user
 }
+
+
+export const updateUser = async(id: number, data: Iprops)=> {
+    const user = await prisma.user.update({
+        where: {
+            id: id
+        },
+        data: {
+            username: data.username,
+            password: data.password,
+            email: data.email
+        },
+        select: {
+            id: true,
+            email: true,
+            password: false,
+            username: true
+        }
+        
+    })
+    return user
+}
