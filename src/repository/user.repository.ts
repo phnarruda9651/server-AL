@@ -3,7 +3,6 @@ import {prisma} from '../services/prisma';
 interface Iprops {
     email: string,
     username:string,
-  
     password: string
 }
 
@@ -34,7 +33,7 @@ export const getAll = async () => {
             username: true
         }
     });
-    return users
+    return users;
 }
 
 export const getById = async( id:number )=> {
@@ -49,7 +48,7 @@ export const getById = async( id:number )=> {
             username: true
         }
     })
-    return user
+    return user;
 }
 
 
@@ -70,6 +69,16 @@ export const updateUser = async(id: number, data: Iprops)=> {
             username: true
         }
         
-    })
-    return user
+    });
+    return user;
+}
+
+export const deleteUser = async(id: number)=> {
+    const user = await prisma.user.delete({
+        where: {
+            id:id
+        },
+    });
+
+    return user;
 }
