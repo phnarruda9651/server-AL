@@ -12,3 +12,16 @@ export const createUser = async(data:any)=> {
     })
     return user;
 }
+
+
+export const getAll = async () => {
+    const users = await prisma.user.findMany({
+        select: {
+            id: true,
+            email: true,
+            password: false,
+            username: true
+        }
+    });
+    return users
+}
