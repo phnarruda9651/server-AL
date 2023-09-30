@@ -4,7 +4,7 @@ import {AuthMiddlwares} from '../middlewares/auth'
 
 const userRoutes = (app: any) => {
     app.post("/user", create);
-    app.get("/user", AuthMiddlwares, get);
+    app.get("/user", get);
     app.get("/user/:id", getId);
     app.put("/user/:id", update);
     app.delete("/user/:id", deleted);
